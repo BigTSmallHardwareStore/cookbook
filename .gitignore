@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+.github/*
+push2docker.sh
+Dockerfile
+docker-compose.yml
+.dockerignore

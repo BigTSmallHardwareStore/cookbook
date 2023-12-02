@@ -1,9 +1,19 @@
 {% extends "recipes/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <title>All recipes</title>
+    <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
+{% endblock %}
 
 
 {% block body %}
 
-    <h1>hello</h1>
-
-
+    <ul class="list-unstyled">
+        {% for recipe in recipes %}
+            <li
+                ><a href="{% url 'recipe' recipe.url_name %}">{{ recipe.recipe_name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

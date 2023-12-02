@@ -1,9 +1,25 @@
 {% extends "recipes/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <title>Welcome</title>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.backgroundImage = "url({% static 'images/background_index.jpg' %})";
+            document.body.style.backgroundSize = "cover"
+        });
+        
+    </script> 
+{% endblock %}
 
 
 {% block body %}
-
+   
+    
     <h1>hello</h1>
 
+
+    <a href="{% url 'all_recipes' %}">Hier geht es zu allen Rezepten</a>
 
 {% endblock %}

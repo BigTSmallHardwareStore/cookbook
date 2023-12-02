@@ -1,0 +1,81 @@
+{% extends "recipes/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <title> {{ recipe.recipe_name }} </title>
+    <link rel="stylesheet" href="{% static 'recipes/styles.css' %}">
+{% endblock %}
+
+
+{% block body %}
+
+    <script type="text/babel">
+        function Amount() {
+            const [count, setCount] = React.useState(1);
+
+            function increaseCount() {
+                setCount(count + 1);
+            }
+
+            function decreaseCount() {
+                if (count === 1) {
+                    setCount(1);
+                }
+                else {
+                setCount(count - 1);
+                }
+            }
+
+
+            return(
+                <div class="row">               
+                    <div class="col-sm-4 order-sm-2 ingredients">    
+
+                        <div class="btn-group">
+                            <button onClick={decreaseCount} class="btn btn-secondary">-</button>
+                            <div class="btn">{count}</div>
+                            <button onClick={increaseCount} class="btn btn-secondary">+</button> 
+                        </div>
+
+                        <ul class="list-unstyled">
+                            {% for ingredient in ingredients %}
+                                <li>
+                                    {% if ingredient.quantity is not null%}
+                                        {count * {{ ingredient.quantity }} + " " }
+                                    {%endif%}
+                                    
+                                    
+                                    {% if ingredient.unit is not null%}
+                                        {{ ingredient.unit }} 
+                                    {%endif%}
+
+                                    {{ ingredient.ingredient}}  
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-8 order-sm-1"> {{ recipe.description | safe }} 
+            
+                    </div>
+                </div>
+
+            );
+        }
+
+        ReactDOM.render(<Amount />, document.querySelector('#counter'));
+    </script>
+
+
+    <h1> {{ recipe.recipe_name }} </h1>
+
+    <!-- checks if picture is present -->
+    {% if recipe.recipe_picture %}
+        <img src="{{ recipe.recipe_picture }}" alt="{{ recipe.recipe_name }}">
+    {% endif %}
+  
+    
+    <p id="counter"></p>
+
+
+{% endblock %}
