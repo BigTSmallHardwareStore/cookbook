@@ -13,7 +13,7 @@ class Category(models.Model):
 
    
 class Ingredient(models.Model):
-    ingredient = models.CharField(max_length=220)
+    ingredient = models.CharField(max_length=220, unique=True)
 
     def __str__(self) -> str:
         return self.ingredient
@@ -41,5 +41,5 @@ class Recipe(models.Model):
 class IngredientToRecipe(models.Model):
     recipe = models.ForeignKey(Recipe, related_name="ingredient_amounts", on_delete=models.SET_NULL, null=True)
     ingredient = models.ForeignKey(Ingredient, related_name="ingredient_amounts", on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.PositiveIntegerField(null=True, blank=True)
+    quantity = models.FloatField(null=True, blank=True)
     unit = models.ForeignKey(Unit, on_delete=models.SET_NULL, null=True, blank=True)

@@ -6,3 +6,4 @@ push2docker.sh
 Dockerfile
 docker-compose.yml
 .dockerignore
+db.sqlite3
